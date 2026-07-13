@@ -65,7 +65,7 @@ dd { margin: 0; font-size: 12px; line-height: 1.75; }
 .section-heading > p { margin: 0 0 4px; }
 .section-heading h2 { margin: 0; font-size: 38px; font-weight: 500; letter-spacing: -.03em; }
 .section-heading > span { color: var(--muted); font-size: 13px; line-height: 1.8; }
-.research-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+.research-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
 .research-card { position: relative; min-height: 260px; padding: 29px 34px 32px 0; border-right: 1px solid var(--line); }
 .research-card + .research-card { padding-left: 34px; }
 .research-card:last-child { border-right: 0; }
