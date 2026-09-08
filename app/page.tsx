@@ -34,6 +34,7 @@ const copy = {
     researchLabel: "研究方向", educationLabel: "教育经历", serviceLabel: "学术服务",
     researchValue: "大模型安全 · 网络安全\n多媒体安全 · AIGC", educationValue: "计算机应用技术博士\n复旦大学", serviceValue: "云南大学 CTF 社团指导老师\n会议与期刊审稿人",
     researchTitle: "研究议题", researchIntro: "从生成模型到攻防系统，研究智能内容如何被安全地创造、传输与使用。",
+    visualCaption: "可信智能 · 安全生成 · 隐蔽通信", visualAlt: "以水墨山形、网络节点和多媒体框架构成的可信智能抽象图",
     teamTitle: "实验室团队", teamIntro: "以开放协作连接导师、研究生和本科生，共同探索可信智能与信息安全。",
     teamNote: "以下为学院主页公开的负责人及部分指导学生信息；成员照片和简介可在内容维护区持续补充。",
     publicationsTitle: "代表论文", officialResults: "查看官方成果列表", educationTitle: "教育经历", projectsTitle: "研究项目", teachingTitle: "课程教学",
@@ -47,6 +48,7 @@ const copy = {
     researchLabel: "Research", educationLabel: "Education", serviceLabel: "Academic service",
     researchValue: "LLM Security · Cybersecurity\nMultimedia Security · AIGC", educationValue: "Ph.D. in Computer Science\nFudan University", serviceValue: "Faculty Advisor, YNU CTF Club\nReviewer for conferences and journals",
     researchTitle: "Research Agenda", researchIntro: "From generative models to defensive systems, we study how intelligent content can be created, transmitted, and used securely.",
+    visualCaption: "Trustworthy AI · Secure Generation · Covert Communication", visualAlt: "Abstract trustworthy AI illustration with ink-wash mountains, network nodes, and multimedia frames",
     teamTitle: "Lab Team", teamIntro: "An open, collaborative community of faculty, graduate researchers, and undergraduate students working on trustworthy AI and information security.",
     teamNote: "The profiles below are based on publicly listed faculty and mentored-student information. Additional portraits and biographies can be added in the content section.",
     publicationsTitle: "Selected Publications", officialResults: "View official publication list", educationTitle: "Education", projectsTitle: "Research Projects", teachingTitle: "Teaching",
@@ -123,6 +125,7 @@ const education = [
 
 function Arrow() { return <span aria-hidden="true">↗</span>; }
 function localize(value: Localized, lang: Lang) { return value[lang]; }
+function assetPath(path: string) { return `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`; }
 
 export default function Home() {
   const [lang, setLang] = useState<Lang>("zh");
@@ -165,6 +168,10 @@ export default function Home() {
             <div><dt>{c.serviceLabel}</dt><dd>{c.serviceValue.split("\n").map((line) => <span key={line}>{line}<br /></span>)}</dd></div>
           </dl>
         </aside>
+        <figure className="hero-visual">
+          <img src={assetPath("/research-security-visual.png")} alt={c.visualAlt} />
+          <figcaption><span>Research visual / 研究图景</span><strong>{c.visualCaption}</strong></figcaption>
+        </figure>
       </section>
 
       <section className="research-section" id="research">
@@ -180,7 +187,7 @@ export default function Home() {
           {teamMembers.map((member) => (
             <article className="member-card" key={member.name.en}>
               <div className="member-portrait">
-                {member.photo ? <img src={member.photo} alt={localize(member.name, lang)} /> : <span aria-hidden="true">{member.initials}</span>}
+                {member.photo ? <img src={assetPath(member.photo)} alt={localize(member.name, lang)} /> : <span aria-hidden="true">{member.initials}</span>}
               </div>
               <p className="member-role">{localize(member.role, lang)}</p>
               <h3>{localize(member.name, lang)}<small>{lang === "zh" ? member.name.en : member.name.zh}</small></h3>
