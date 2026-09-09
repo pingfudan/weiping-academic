@@ -54,7 +54,11 @@ main { max-width: 1600px; margin: 0 auto; padding: 0 76px; overflow: hidden; }
 .eyebrow, .section-heading > p { margin: 0 0 25px; color: var(--wine); font: 600 12px/1.4 var(--sans); letter-spacing: .17em; text-transform: uppercase; }
 h1 { margin: 0; font-size: clamp(66px, 7vw, 112px); font-weight: 500; line-height: .88; letter-spacing: -.045em; }
 h1 em { display: block; margin: 18px 0 0 6px; color: var(--muted); font: italic 400 15px/1 var(--serif); letter-spacing: .2em; }
-.statement { max-width: 850px; margin: 52px 0 24px; font-size: clamp(22px, 2vw, 29px); line-height: 1.65; }
+.hero-intro { display: grid; grid-template-columns: 210px minmax(0, 1fr); align-items: start; gap: 40px; margin-top: 48px; }
+.profile-portrait { margin: 0; }
+.profile-portrait img { display: block; width: 100%; aspect-ratio: 4 / 5.25; object-fit: cover; object-position: center top; border-top: 3px solid var(--wine); filter: saturate(.78) contrast(.97); }
+.profile-portrait figcaption { padding-top: 11px; color: var(--muted); font: 12px/1.55 var(--sans); }
+.statement { max-width: 850px; margin: 0 0 24px; font-size: clamp(22px, 2vw, 29px); line-height: 1.65; }
 .bio { max-width: 790px; margin: 0; color: var(--muted); font-size: 17px; line-height: 1.95; }
 .hero-actions { display: flex; align-items: center; gap: 32px; margin-top: 38px; font-family: var(--sans); font-size: 15px; }
 .primary-link { display: inline-flex; gap: 34px; align-items: center; padding: 15px 18px; border: 1px solid var(--wine); color: var(--wine); transition: .2s ease; }
@@ -90,8 +94,7 @@ dd { margin: 0; font-size: 15px; line-height: 1.75; }
 .team-section { padding: 76px 0 82px; border-bottom: 1px solid var(--ink); }
 .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 .member-card { min-width: 0; padding-top: 14px; border-top: 1px solid var(--line); }
-.member-portrait { aspect-ratio: 4 / 4.6; display: grid; place-items: center; overflow: hidden; margin-bottom: 22px; background: color-mix(in srgb, var(--wine) 8%, var(--paper-light)); color: var(--wine); font: 500 clamp(32px, 4vw, 56px)/1 var(--serif); letter-spacing: .08em; }
-.member-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center 22%; filter: saturate(.76) contrast(.96); }
+.member-portrait { aspect-ratio: 1; overflow: hidden; margin-bottom: 22px; background-color: color-mix(in srgb, var(--wine) 8%, var(--paper-light)); background-repeat: no-repeat; background-size: 200% 200%; border-top: 2px solid var(--wine); }
 .member-role { min-height: 36px; margin: 0 0 10px; color: var(--wine); font: 12px/1.6 var(--sans); letter-spacing: .08em; text-transform: uppercase; }
 .member-card h3 { margin: 0 0 14px; font-size: 25px; font-weight: 500; }
 .member-card h3 small { display: block; margin-top: 7px; color: var(--muted); font: italic 13px/1 var(--serif); letter-spacing: .08em; }
@@ -138,6 +141,7 @@ footer p { margin: 0; } footer a { color: var(--wine); }
   .desktop-nav { display: none; }
   .hero { grid-template-columns: 1fr; gap: 52px; padding: 64px 0; }
   .hero-aside { max-width: 430px; }
+  .hero-intro { grid-template-columns: 190px minmax(0, 1fr); gap: 30px; }
   .hero-visual { min-height: 300px; aspect-ratio: 16 / 7; }
   .section-heading { grid-template-columns: 1fr; gap: 8px; }
   .section-heading > span { max-width: 540px; }
@@ -155,10 +159,11 @@ footer p { margin: 0; } footer a { color: var(--wine); }
   .wordmark small, .cv-link { display: none; }
   h1 { font-size: 62px; }
   .statement { font-size: 21px; }
+  .hero-intro { grid-template-columns: 1fr; gap: 28px; }
+  .profile-portrait { width: min(58vw, 220px); }
   .hero-actions { align-items: flex-start; flex-direction: column; gap: 18px; }
   .section-heading h2 { font-size: 31px; }
   .team-grid { grid-template-columns: 1fr; }
-  .member-portrait { aspect-ratio: 4 / 4.2; }
   .hero-visual { min-height: 360px; aspect-ratio: 4 / 3; }
   .hero-visual img { object-position: 60% center; }
   .hero-visual figcaption { display: block; padding: 13px 15px; }

@@ -36,7 +36,8 @@ const copy = {
     researchTitle: "研究议题", researchIntro: "从生成模型到攻防系统，研究智能内容如何被安全地创造、传输与使用。",
     visualCaption: "可信智能 · 安全生成 · 隐蔽通信", visualAlt: "以水墨山形、网络节点和多媒体框架构成的可信智能抽象图",
     teamTitle: "实验室团队", teamIntro: "以开放协作连接导师、研究生和本科生，共同探索可信智能与信息安全。",
-    teamNote: "以下为学院主页公开的负责人及部分指导学生信息；成员照片和简介可在内容维护区持续补充。",
+    teamNote: "以下为学院主页公开的负责人及部分指导学生信息；卡通头像为临时占位，并非成员本人肖像。",
+    portraitCaption: "韦平 · 云南大学软件学院", portraitAlt: "韦平老师个人照片", avatarAlt: "卡通占位头像",
     publicationsTitle: "代表论文", officialResults: "查看官方成果列表", educationTitle: "教育经历", projectsTitle: "研究项目", teachingTitle: "课程教学",
     contactTitle: "一起探索可信智能，\n解决真实安全问题。",
     contactText: "欢迎数理基础好、编程能力强、踏实进取，对大模型安全、网络安全、多媒体安全和 AIGC 感兴趣的同学加入团队。实验室重视融洽协作与长期成长。",
@@ -50,7 +51,8 @@ const copy = {
     researchTitle: "Research Agenda", researchIntro: "From generative models to defensive systems, we study how intelligent content can be created, transmitted, and used securely.",
     visualCaption: "Trustworthy AI · Secure Generation · Covert Communication", visualAlt: "Abstract trustworthy AI illustration with ink-wash mountains, network nodes, and multimedia frames",
     teamTitle: "Lab Team", teamIntro: "An open, collaborative community of faculty, graduate researchers, and undergraduate students working on trustworthy AI and information security.",
-    teamNote: "The profiles below are based on publicly listed faculty and mentored-student information. Additional portraits and biographies can be added in the content section.",
+    teamNote: "The profiles below are based on publicly listed faculty and mentored-student information. Cartoon avatars are temporary placeholders and do not depict the actual members.",
+    portraitCaption: "Ping Wei · School of Software, Yunnan University", portraitAlt: "Portrait of Ping Wei", avatarAlt: "temporary cartoon avatar",
     publicationsTitle: "Selected Publications", officialResults: "View official publication list", educationTitle: "Education", projectsTitle: "Research Projects", teachingTitle: "Teaching",
     contactTitle: "Building trustworthy AI,\nsolving real security problems.",
     contactText: "We welcome motivated students with strong mathematical foundations, programming skills, and interests in LLM security, cybersecurity, multimedia security, or AIGC. The lab values collaboration and long-term growth.",
@@ -70,25 +72,25 @@ const teamMembers = [
     name: { zh: "韦平", en: "Ping Wei" },
     role: { zh: "实验室负责人 · 讲师", en: "Principal Investigator · Lecturer" },
     intro: { zh: "研究大模型应用与安全、网络安全、多媒体安全和 AI 生成内容，主持国家自然科学基金项目。", en: "Researches LLM security, cybersecurity, multimedia security, and AIGC; principal investigator of an NSFC project." },
-    photo: "/team/weiping.jpeg", initials: "PW",
+    avatarPosition: "0% 0%",
   },
   {
     name: { zh: "郭文斌", en: "Wenbin Guo" },
     role: { zh: "指导学生 · 研究生", en: "Mentored Student · Graduate" },
     intro: { zh: "研究生阶段由团队共同指导，现于中山大学攻读博士学位。", en: "Co-supervised as a graduate student and currently pursuing a doctoral degree at Sun Yat-sen University." },
-    initials: "WG",
+    avatarPosition: "100% 0%",
   },
   {
     name: { zh: "刘理科", en: "Like Liu" },
     role: { zh: "指导学生 · 本科生 / CTF", en: "Mentored Student · Undergraduate / CTF" },
     intro: { zh: "云南大学 CTF 战队成员，完成本科毕业设计，毕业后就职于阿里巴巴。", en: "A member of the Yunnan University CTF team and an undergraduate thesis student; now working at Alibaba." },
-    initials: "LL",
+    avatarPosition: "0% 100%",
   },
   {
     name: { zh: "刘起含", en: "Qihan Liu" },
     role: { zh: "指导学生 · 本科生", en: "Mentored Student · Undergraduate" },
     intro: { zh: "本科阶段接受团队指导，已推免至中国科学院沈阳自动化研究所。", en: "Mentored as an undergraduate and admitted to the Shenyang Institute of Automation, Chinese Academy of Sciences." },
-    initials: "QL",
+    avatarPosition: "100% 100%",
   },
 ];
 
@@ -156,8 +158,16 @@ export default function Home() {
         <div className="hero-main">
           <p className="eyebrow">{localize(profile.university, lang)} · {localize(profile.field, lang)}</p>
           <h1>{localize(profile.name, lang)}<em>{lang === "zh" ? "Ping Wei" : "韦平"}</em></h1>
-          <p className="statement">“{localize(profile.statement, lang)}”</p>
-          <p className="bio">{localize(profile.bio, lang)}</p>
+          <div className="hero-intro">
+            <figure className="profile-portrait">
+              <img src={assetPath("/team/weiping.jpeg")} alt={c.portraitAlt} />
+              <figcaption>{c.portraitCaption}</figcaption>
+            </figure>
+            <div>
+              <p className="statement">“{localize(profile.statement, lang)}”</p>
+              <p className="bio">{localize(profile.bio, lang)}</p>
+            </div>
+          </div>
           <div className="hero-actions"><a className="primary-link" href="#publications">{c.achievements} <Arrow /></a><a className="text-link" href={`mailto:${profile.email}`}>{c.collaborate}</a></div>
         </div>
         <aside className="hero-aside" aria-label={lang === "zh" ? "个人信息" : "Profile summary"}>
@@ -186,9 +196,12 @@ export default function Home() {
         <div className="team-grid">
           {teamMembers.map((member) => (
             <article className="member-card" key={member.name.en}>
-              <div className="member-portrait">
-                {member.photo ? <img src={assetPath(member.photo)} alt={localize(member.name, lang)} /> : <span aria-hidden="true">{member.initials}</span>}
-              </div>
+              <div
+                className="member-portrait"
+                role="img"
+                aria-label={`${localize(member.name, lang)}：${c.avatarAlt}`}
+                style={{ backgroundImage: `url(${assetPath("/team/lab-avatar-sprite.png")})`, backgroundPosition: member.avatarPosition }}
+              />
               <p className="member-role">{localize(member.role, lang)}</p>
               <h3>{localize(member.name, lang)}<small>{lang === "zh" ? member.name.en : member.name.zh}</small></h3>
               <p>{localize(member.intro, lang)}</p>
