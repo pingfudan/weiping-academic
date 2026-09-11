@@ -179,7 +179,7 @@ export default function Home() {
           </dl>
         </aside>
         <figure className="hero-visual">
-          <img src={assetPath("/research-security-visual.png")} alt={c.visualAlt} />
+          <img src={assetPath("/research-security-visual.webp")} alt={c.visualAlt} />
           <figcaption><span>Research visual / 研究图景</span><strong>{c.visualCaption}</strong></figcaption>
         </figure>
       </section>
@@ -200,7 +200,7 @@ export default function Home() {
                 className="member-portrait"
                 role="img"
                 aria-label={`${localize(member.name, lang)}：${c.avatarAlt}`}
-                style={{ backgroundImage: `url(${assetPath("/team/lab-avatar-sprite.png")})`, backgroundPosition: member.avatarPosition }}
+                style={{ backgroundImage: `url(${assetPath("/team/lab-avatar-sprite.webp")})`, backgroundPosition: member.avatarPosition }}
               />
               <p className="member-role">{localize(member.role, lang)}</p>
               <h3>{localize(member.name, lang)}<small>{lang === "zh" ? member.name.en : member.name.zh}</small></h3>
