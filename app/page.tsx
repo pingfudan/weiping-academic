@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import scholarPublications from "@/data/publications.json";
 
 type Lang = "zh" | "en";
 type Localized = { zh: string; en: string };
@@ -25,6 +26,7 @@ const profile = {
   email: "weip@ynu.edu.cn",
   office: { zh: "软件学院 1-225 室", en: "Room 1-225, School of Software" },
   officialPage: "https://www.sei.ynu.edu.cn/info/1023/2241.htm",
+  scholarPage: "https://scholar.google.com.hk/citations?hl=zh-CN&user=Rsxs2jgAAAAJ&view_op=list_works&sortby=pubdate",
 };
 
 const copy = {
@@ -36,12 +38,13 @@ const copy = {
     researchTitle: "研究议题", researchIntro: "从生成模型到攻防系统，研究智能内容如何被安全地创造、传输与使用。",
     visualCaption: "可信智能 · 安全生成 · 隐蔽通信", visualAlt: "以水墨山形、网络节点和多媒体框架构成的可信智能抽象图",
     teamTitle: "实验室团队", teamIntro: "以开放协作连接导师、研究生和本科生，共同探索可信智能与信息安全。",
-    teamNote: "以下为学院主页公开的负责人及部分指导学生信息；卡通头像为临时占位，并非成员本人肖像。",
+    teamNote: "成员卡通头像为风格化占位图，并非本人肖像。",
+    teamLead: "实验室负责人", currentMembers: "在读研究生", alumniMembers: "已毕业成员",
     portraitCaption: "韦平 · 云南大学软件学院", portraitAlt: "韦平老师个人照片", avatarAlt: "卡通占位头像",
-    publicationsTitle: "代表论文", officialResults: "查看官方成果列表", educationTitle: "教育经历", projectsTitle: "研究项目", teachingTitle: "课程教学",
+    publicationsTitle: "代表论文", officialResults: "查看 Google Scholar 全部成果", publicationRule: "每周自动同步 Google Scholar；以引用影响力划分质量层级，同层级按年份由新到旧排序。", citations: "引用", educationTitle: "教育经历", projectsTitle: "研究项目", teachingTitle: "课程教学",
     contactTitle: "一起探索可信智能，\n解决真实安全问题。",
     contactText: "欢迎数理基础好、编程能力强、踏实进取，对大模型安全、网络安全、多媒体安全和 AIGC 感兴趣的同学加入团队。实验室重视融洽协作与长期成长。",
-    updated: "资料更新：2026 年 3 月", source: "信息来源：学院主页 ↗",
+    updated: "资料更新：2026 年 9 月", source: "信息来源：学院主页 ↗",
   },
   en: {
     navResearch: "Research", navTeam: "Team", navPapers: "Publications", navCv: "CV", navTeaching: "Teaching", navContact: "Contact",
@@ -51,12 +54,13 @@ const copy = {
     researchTitle: "Research Agenda", researchIntro: "From generative models to defensive systems, we study how intelligent content can be created, transmitted, and used securely.",
     visualCaption: "Trustworthy AI · Secure Generation · Covert Communication", visualAlt: "Abstract trustworthy AI illustration with ink-wash mountains, network nodes, and multimedia frames",
     teamTitle: "Lab Team", teamIntro: "An open, collaborative community of faculty, graduate researchers, and undergraduate students working on trustworthy AI and information security.",
-    teamNote: "The profiles below are based on publicly listed faculty and mentored-student information. Cartoon avatars are temporary placeholders and do not depict the actual members.",
+    teamNote: "Cartoon avatars are stylized placeholders and do not depict the actual members.",
+    teamLead: "Lab Director", currentMembers: "Current Graduate Researchers", alumniMembers: "Alumni",
     portraitCaption: "Ping Wei · School of Software, Yunnan University", portraitAlt: "Portrait of Ping Wei", avatarAlt: "temporary cartoon avatar",
-    publicationsTitle: "Selected Publications", officialResults: "View official publication list", educationTitle: "Education", projectsTitle: "Research Projects", teachingTitle: "Teaching",
+    publicationsTitle: "Selected Publications", officialResults: "View all on Google Scholar", publicationRule: "Synced weekly from Google Scholar. Quality tiers use citation impact; papers within each tier are ordered newest first.", citations: "Citations", educationTitle: "Education", projectsTitle: "Research Projects", teachingTitle: "Teaching",
     contactTitle: "Building trustworthy AI,\nsolving real security problems.",
     contactText: "We welcome motivated students with strong mathematical foundations, programming skills, and interests in LLM security, cybersecurity, multimedia security, or AIGC. The lab values collaboration and long-term growth.",
-    updated: "Profile updated: March 2026", source: "Source: School profile ↗",
+    updated: "Profile updated: September 2026", source: "Source: School profile ↗",
   },
 };
 
@@ -67,41 +71,83 @@ const researchAreas = [
   { number: "04", title: { zh: "AI 生成内容", en: "AI-Generated Content" }, description: { zh: "探索文本、图像与视频生成技术，以及生成内容的安全性、可控性与可信应用。", en: "Text, image, and video generation with an emphasis on safety, controllability, and trustworthy applications." } },
 ];
 
-const teamMembers = [
+const teamLead = {
+  name: { zh: "韦平", en: "Ping Wei" },
+  role: { zh: "实验室负责人 · 讲师", en: "Principal Investigator · Lecturer" },
+  intro: { zh: "研究大模型应用与安全、网络安全、多媒体安全和 AI 生成内容，主持国家自然科学基金项目。", en: "Researches LLM security, cybersecurity, multimedia security, and AIGC; principal investigator of an NSFC project." },
+};
+
+const currentMembers = [
   {
-    name: { zh: "韦平", en: "Ping Wei" },
-    role: { zh: "实验室负责人 · 讲师", en: "Principal Investigator · Lecturer" },
-    intro: { zh: "研究大模型应用与安全、网络安全、多媒体安全和 AI 生成内容，主持国家自然科学基金项目。", en: "Researches LLM security, cybersecurity, multimedia security, and AIGC; principal investigator of an NSFC project." },
-    avatarPosition: "0% 0%",
+    name: { zh: "董恒冰", en: "Hengbing Dong" },
+    role: { zh: "在读研究生", en: "Graduate Researcher" },
+    intro: { zh: "研究方向：流量加密。", en: "Research focus: encrypted traffic." },
+    avatarPosition: "66.666% 0%",
   },
   {
-    name: { zh: "郭文斌", en: "Wenbin Guo" },
-    role: { zh: "指导学生 · 研究生", en: "Mentored Student · Graduate" },
-    intro: { zh: "研究生阶段由团队共同指导，现于中山大学攻读博士学位。", en: "Co-supervised as a graduate student and currently pursuing a doctoral degree at Sun Yat-sen University." },
+    name: { zh: "陈文宇", en: "Wenyu Chen" },
+    role: { zh: "在读研究生", en: "Graduate Researcher" },
+    intro: { zh: "研究方向：大模型多智能体。", en: "Research focus: LLM-based multi-agent systems." },
     avatarPosition: "100% 0%",
   },
   {
-    name: { zh: "刘理科", en: "Like Liu" },
-    role: { zh: "指导学生 · 本科生 / CTF", en: "Mentored Student · Undergraduate / CTF" },
-    intro: { zh: "云南大学 CTF 战队成员，完成本科毕业设计，毕业后就职于阿里巴巴。", en: "A member of the Yunnan University CTF team and an undergraduate thesis student; now working at Alibaba." },
+    name: { zh: "张又新", en: "Youxin Zhang" },
+    role: { zh: "在读研究生", en: "Graduate Researcher" },
+    intro: { zh: "研究方向：大模型多智能体。", en: "Research focus: LLM-based multi-agent systems." },
     avatarPosition: "0% 100%",
   },
   {
-    name: { zh: "刘起含", en: "Qihan Liu" },
-    role: { zh: "指导学生 · 本科生", en: "Mentored Student · Undergraduate" },
-    intro: { zh: "本科阶段接受团队指导，已推免至中国科学院沈阳自动化研究所。", en: "Mentored as an undergraduate and admitted to the Shenyang Institute of Automation, Chinese Academy of Sciences." },
+    name: { zh: "龙超", en: "Chao Long" },
+    role: { zh: "在读研究生", en: "Graduate Researcher" },
+    intro: { zh: "研究方向：大模型多智能体。", en: "Research focus: LLM-based multi-agent systems." },
+    avatarPosition: "66.666% 100%",
+  },
+  {
+    name: { zh: "王曼云", en: "Manyun Wang" },
+    role: { zh: "在读研究生", en: "Graduate Researcher" },
+    intro: { zh: "研究方向：大模型多智能体。", en: "Research focus: LLM-based multi-agent systems." },
     avatarPosition: "100% 100%",
+  },
+  {
+    name: { zh: "秦鹏翼", en: "Pengyi Qin" },
+    role: { zh: "在读研究生", en: "Graduate Researcher" },
+    intro: { zh: "研究方向：大模型多智能体。", en: "Research focus: LLM-based multi-agent systems." },
+    avatarPosition: "33.333% 100%",
   },
 ];
 
-const publications = [
-  { year: "2025", title: "Conditional Flow-Based Generative Steganography", authors: "Q. Zhou*, P. Wei*, Z. Qian, X. Zhang, S. Li & C. Qin", venue: "IEEE Transactions on Dependable and Secure Computing, 22(5): 5632–5647", tag: { zh: "共同一作 · 中科院 1 区", en: "Co-first author · CAS Q1" } },
-  { year: "2025", title: "Improved Generative Steganography Based on Diffusion Model", authors: "Q. Zhou, P. Wei*, Z. Qian et al.", venue: "IEEE Transactions on Circuits and Systems for Video Technology", tag: { zh: "通讯作者 · 中科院 1 区", en: "Corresponding author · CAS Q1" } },
-  { year: "2025", title: "GCQ-ViT: Group-Aware Collaborative Post-Training Quantization for Vision Transformers", authors: "P. Pan, W. Guo, P. Wei* & W. Zhou", venue: "ECAI 2025 — 28th European Conference on Artificial Intelligence", tag: { zh: "通讯作者 · CCF-B", en: "Corresponding author · CCF-B" } },
-  { year: "2024", title: "GCStego: Group Chatting-based Behavior Imperceptible Text Steganography", authors: "F. Li, P. Wei*, T. Fu, Y. Lin* & W. Zhou", venue: "IEEE International Conference on Multimedia and Expo (ICME)", tag: { zh: "通讯作者 · CCF-B", en: "Corresponding author · CCF-B" } },
-  { year: "2022", title: "Generative Steganography Network", authors: "P. Wei, S. Li, X. Zhang et al.", venue: "Proceedings of the 30th ACM International Conference on Multimedia", tag: { zh: "第一作者 · CCF-A", en: "First author · CCF-A" } },
-  { year: "2022", title: "Generative Steganographic Flow", authors: "P. Wei, G. Luo, Q. Song et al.", venue: "IEEE International Conference on Multimedia and Expo (ICME)", tag: { zh: "第一作者 · CCF-B", en: "First author · CCF-B" } },
+const alumniMembers = [
+  {
+    name: { zh: "郭文斌", en: "Wenbin Guo" },
+    role: { zh: "已毕业", en: "Alumnus" },
+    intro: { zh: "实验室已毕业成员。", en: "Lab alumnus." },
+    avatarPosition: "0% 0%",
+  },
+  {
+    name: { zh: "刘西莹", en: "Xiying Liu" },
+    role: { zh: "已毕业", en: "Alumnus" },
+    intro: { zh: "实验室已毕业成员。", en: "Lab alumnus." },
+    avatarPosition: "33.333% 0%",
+  },
 ];
+
+function publicationTier(citations: number) {
+  if (citations >= 50) return 3;
+  if (citations >= 20) return 2;
+  if (citations >= 5) return 1;
+  return 0;
+}
+
+function publicationTag(citations: number, year: number, lang: Lang) {
+  if (citations >= 50) return lang === "zh" ? "高影响力" : "High impact";
+  if (citations >= 20) return lang === "zh" ? "较高影响力" : "Strong impact";
+  if (year >= new Date().getFullYear() - 1) return lang === "zh" ? "新近成果" : "Recent work";
+  return lang === "zh" ? "代表成果" : "Selected work";
+}
+
+const publications = [...scholarPublications]
+  .sort((a, b) => publicationTier(b.citations) - publicationTier(a.citations) || b.year - a.year || b.citations - a.citations)
+  .slice(0, 12);
 
 const projects = [
   { period: "2025—2028", name: { zh: "面向社交软件的图文多模态生成式隐写研究", en: "Multimodal Generative Steganography for Social Platforms" }, source: { zh: "国家自然科学基金地区科学基金项目 · 主持 · 62462067", en: "NSFC Regional Science Fund · Principal Investigator · 62462067" } },
@@ -193,31 +239,47 @@ export default function Home() {
 
       <section className="team-section" id="team">
         <div className="section-heading"><p>People & community</p><h2>{c.teamTitle}</h2><span>{c.teamIntro}</span></div>
-        <div className="team-grid">
-          {teamMembers.map((member) => (
-            <article className="member-card" key={member.name.en}>
-              <div
-                className="member-portrait"
-                role="img"
-                aria-label={`${localize(member.name, lang)}：${c.avatarAlt}`}
-                style={{ backgroundImage: `url(${assetPath("/team/lab-avatar-sprite.webp")})`, backgroundPosition: member.avatarPosition }}
-              />
-              <p className="member-role">{localize(member.role, lang)}</p>
-              <h3>{localize(member.name, lang)}<small>{lang === "zh" ? member.name.en : member.name.zh}</small></h3>
-              <p>{localize(member.intro, lang)}</p>
-            </article>
-          ))}
+        <div className="team-group lead-group">
+          <p className="team-group-title">{c.teamLead}</p>
+          <article className="team-lead-card">
+            <img src={assetPath("/team/weiping.jpeg")} alt={c.portraitAlt} />
+            <div><p className="member-role">{localize(teamLead.role, lang)}</p><h3>{localize(teamLead.name, lang)}<small>{lang === "zh" ? teamLead.name.en : teamLead.name.zh}</small></h3><p>{localize(teamLead.intro, lang)}</p></div>
+          </article>
         </div>
+        {[
+          { title: c.currentMembers, members: currentMembers },
+          { title: c.alumniMembers, members: alumniMembers },
+        ].map((group) => (
+          <div className="team-group" key={group.title}>
+            <p className="team-group-title">{group.title}<span>{String(group.members.length).padStart(2, "0")}</span></p>
+            <div className="team-grid">
+              {group.members.map((member) => (
+                <article className="member-card" key={member.name.en}>
+                  <div
+                    className="member-portrait"
+                    role="img"
+                    aria-label={`${localize(member.name, lang)}：${c.avatarAlt}`}
+                    style={{ backgroundImage: `url(${assetPath("/team/lab-member-sprite.webp")})`, backgroundPosition: member.avatarPosition }}
+                  />
+                  <p className="member-role">{localize(member.role, lang)}</p>
+                  <h3>{localize(member.name, lang)}<small>{lang === "zh" ? member.name.en : member.name.zh}</small></h3>
+                  <p>{localize(member.intro, lang)}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        ))}
         <p className="team-note">{c.teamNote}</p>
       </section>
 
       <div className="content-grid">
         <section className="publications" id="publications">
           <div className="section-heading compact"><p>Selected publications</p><h2>{c.publicationsTitle}</h2></div>
+          <p className="publication-rule">{c.publicationRule}</p>
           <div className="publication-list">
-            {publications.map((paper) => <article className="publication" key={paper.title}><div className="pub-meta"><span>{paper.year}</span><span>{localize(paper.tag, lang)}</span></div><h3>{paper.title}</h3><p>{paper.authors}</p><cite>{paper.venue}</cite></article>)}
+            {publications.map((paper) => <article className="publication" key={paper.title}><div className="pub-meta"><span>{paper.year}</span><span>{publicationTag(paper.citations, paper.year, lang)} · {c.citations} {paper.citations}</span></div><h3><a href={paper.url} target="_blank" rel="noreferrer">{paper.title} <Arrow /></a></h3><p>{paper.authors}</p><cite>{paper.venue}</cite></article>)}
           </div>
-          <a className="all-link" href={profile.officialPage} target="_blank" rel="noreferrer">{c.officialResults} <Arrow /></a>
+          <a className="all-link" href={profile.scholarPage} target="_blank" rel="noreferrer">{c.officialResults} <Arrow /></a>
         </section>
 
         <aside className="side-column">

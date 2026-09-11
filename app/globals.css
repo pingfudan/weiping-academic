@@ -92,9 +92,17 @@ dd { margin: 0; font-size: 15px; line-height: 1.75; }
 .research-card > p:last-child { max-width: 320px; margin: 0; color: var(--muted); font-size: 15px; line-height: 1.9; }
 
 .team-section { padding: 76px 0 82px; border-bottom: 1px solid var(--ink); }
+.team-group + .team-group { margin-top: 52px; }
+.team-group-title { display: flex; justify-content: space-between; align-items: center; margin: 0 0 20px; padding-bottom: 11px; border-bottom: 1px solid var(--ink); color: var(--wine); font: 600 13px/1.4 var(--sans); letter-spacing: .13em; text-transform: uppercase; }
+.team-group-title span { color: var(--muted); font-weight: 400; }
+.team-lead-card { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 34px; align-items: center; max-width: 760px; padding: 0 0 4px; }
+.team-lead-card img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; border-top: 2px solid var(--wine); filter: saturate(.78) contrast(.97); }
+.team-lead-card h3 { margin: 0 0 14px; font-size: 29px; font-weight: 500; }
+.team-lead-card h3 small { display: block; margin-top: 7px; color: var(--muted); font: italic 13px/1 var(--serif); letter-spacing: .08em; }
+.team-lead-card > div > p:last-child { max-width: 550px; margin: 0; color: var(--muted); font-size: 16px; line-height: 1.9; }
 .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 .member-card { min-width: 0; padding-top: 14px; border-top: 1px solid var(--line); }
-.member-portrait { aspect-ratio: 1; overflow: hidden; margin-bottom: 22px; background-color: color-mix(in srgb, var(--wine) 8%, var(--paper-light)); background-repeat: no-repeat; background-size: 200% 200%; border-top: 2px solid var(--wine); }
+.member-portrait { aspect-ratio: 1; overflow: hidden; margin-bottom: 22px; background-color: color-mix(in srgb, var(--wine) 8%, var(--paper-light)); background-repeat: no-repeat; background-size: 400% 200%; border-top: 2px solid var(--wine); }
 .member-role { min-height: 36px; margin: 0 0 10px; color: var(--wine); font: 12px/1.6 var(--sans); letter-spacing: .08em; text-transform: uppercase; }
 .member-card h3 { margin: 0 0 14px; font-size: 25px; font-weight: 500; }
 .member-card h3 small { display: block; margin-top: 7px; color: var(--muted); font: italic 13px/1 var(--serif); letter-spacing: .08em; }
@@ -105,10 +113,12 @@ dd { margin: 0; font-size: 15px; line-height: 1.75; }
 .section-heading.compact { display: block; margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid var(--ink); }
 .section-heading.compact > p { margin-bottom: 12px; }
 .section-heading.compact h2 { font-size: 36px; }
+.publication-rule { margin: -5px 0 20px; padding: 0 0 20px; border-bottom: 1px solid var(--line); color: var(--muted); font: 14px/1.75 var(--sans); }
 .publication { padding: 25px 10px 25px 0; border-bottom: 1px solid var(--line); transition: transform .2s ease, color .2s ease; }
 .publication:hover { color: var(--wine-dark); transform: translateX(8px); }
 .pub-meta { display: flex; justify-content: space-between; color: var(--wine); font: 12px/1 var(--sans); letter-spacing: .1em; text-transform: uppercase; }
 .publication h3 { max-width: 760px; margin: 13px 0 12px; font-size: 22px; line-height: 1.42; font-weight: 500; }
+.publication h3 a span { display: inline-block; margin-left: 4px; color: var(--wine); font-size: .72em; }
 .publication p { margin: 0 0 8px; color: var(--muted); font-size: 15px; }
 .publication cite { font-size: 14px; line-height: 1.55; }
 .all-link { display: inline-flex; gap: 28px; margin-top: 28px; padding-bottom: 5px; border-bottom: 1px solid var(--wine); color: var(--wine); font: 14px/1.5 var(--sans); }
@@ -147,6 +157,7 @@ footer p { margin: 0; } footer a { color: var(--wine); }
   .section-heading > span { max-width: 540px; }
   .research-grid, .content-grid, .contact-section { grid-template-columns: 1fr; }
   .team-grid { grid-template-columns: repeat(2, 1fr); gap: 42px 24px; }
+  .team-lead-card { max-width: 680px; }
   .research-card { min-height: auto; padding: 28px 0; border-right: 0; border-bottom: 1px solid var(--line); }
   .research-card + .research-card { padding-left: 0; }
   .card-english { margin-top: 24px; }
@@ -164,6 +175,8 @@ footer p { margin: 0; } footer a { color: var(--wine); }
   .hero-actions { align-items: flex-start; flex-direction: column; gap: 18px; }
   .section-heading h2 { font-size: 31px; }
   .team-grid { grid-template-columns: 1fr; }
+  .team-lead-card { grid-template-columns: 1fr; gap: 24px; }
+  .team-lead-card img { width: min(58vw, 220px); }
   .hero-visual { min-height: 360px; aspect-ratio: 4 / 3; }
   .hero-visual img { object-position: 60% center; }
   .hero-visual figcaption { display: block; padding: 13px 15px; }
