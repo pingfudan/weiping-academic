@@ -43,7 +43,7 @@
     "title": "Improved generative steganography based on diffusion model",
     "authors": "Q Zhou, P Wei, Z Qian, X Zhang, S Li",
     "venue": "IEEE Transactions on Circuits and Systems for Video Technology 35 (7), 6494-6507",
-    "citations": 43,
+    "citations": 46,
     "year": 2025,
     "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Rsxs2jgAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=Rsxs2jgAAAAJ:hqOjcs7Dif8C"
   },
@@ -59,7 +59,7 @@
     "title": "A survey on deep-learning-based image steganography",
     "authors": "B Song, P Wei, S Wu, Y Lin, W Zhou",
     "venue": "Expert Systems with Applications 254, 124390",
-    "citations": 92,
+    "citations": 105,
     "year": 2024,
     "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Rsxs2jgAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=Rsxs2jgAAAAJ:eQOLeE2rZwMC"
   },
@@ -107,14 +107,14 @@
     "title": "Generative steganography diffusion",
     "authors": "P Wei, Q Zhou, Z Wang, Z Qian, X Zhang, S Li",
     "venue": "arXiv preprint arXiv:2305.03472",
-    "citations": 39,
+    "citations": 43,
     "year": 2023,
     "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Rsxs2jgAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=Rsxs2jgAAAAJ:YsMSGLbcyi4C"
   },
   {
     "title": "隐蔽图像后门攻击",
     "authors": "朱淑雯， 罗戈， 韦平， 李晟， 张新鹏， 钱振兴",
-    "venue": "中国图象图形学报 28 (3), 864-877",
+    "venue": "image 28 (3)",
     "citations": 0,
     "year": 2023,
     "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Rsxs2jgAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=Rsxs2jgAAAAJ:zYLM7Y9cAGgC"
@@ -131,7 +131,7 @@
     "title": "Image sanitization in online social networks: A general framework for breaking robust information hiding",
     "authors": "Z Zhu, P Wei, Z Qian, S Li, X Zhang",
     "venue": "IEEE Transactions on Circuits and Systems for Video Technology 33 (6), 3017-3029",
-    "citations": 29,
+    "citations": 31,
     "year": 2022,
     "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Rsxs2jgAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=Rsxs2jgAAAAJ:Tyk-4Ss8FVUC"
   },
@@ -139,7 +139,7 @@
     "title": "Generative steganography network",
     "authors": "P Wei, S Li, X Zhang, G Luo, Z Qian, Q Zhou",
     "venue": "Proceedings of the 30th ACM international conference on multimedia, 1621-1629",
-    "citations": 109,
+    "citations": 111,
     "year": 2022,
     "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Rsxs2jgAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=Rsxs2jgAAAAJ:d1gkVwhDpl0C"
   },
@@ -147,7 +147,7 @@
     "title": "Generative steganographic flow",
     "authors": "P Wei, G Luo, Q Song, X Zhang, Z Qian, S Li",
     "venue": "2022 IEEE international conference on multimedia and expo (ICME), 1-6",
-    "citations": 41,
+    "citations": 42,
     "year": 2022,
     "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Rsxs2jgAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=Rsxs2jgAAAAJ:u5HHmVD_uO8C"
   },
@@ -163,7 +163,7 @@
     "title": "Image steganalysis with convolutional vision transformer",
     "authors": "G Luo, P Wei, S Zhu, X Zhang, Z Qian, S Li",
     "venue": "ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and …",
-    "citations": 41,
+    "citations": 44,
     "year": 2022,
     "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Rsxs2jgAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=Rsxs2jgAAAAJ:u-x6o8ySG0sC"
   },
@@ -171,7 +171,7 @@
     "title": "Fragile neural network watermarking with trigger image set",
     "authors": "R Zhu, P Wei, S Li, Z Yin, X Zhang, Z Qian",
     "venue": "International Conference on Knowledge Science, Engineering and Management …",
-    "citations": 41,
+    "citations": 42,
     "year": 2021,
     "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=Rsxs2jgAAAAJ&pagesize=100&sortby=pubdate&citation_for_view=Rsxs2jgAAAAJ:9yKSN-GCB0IC"
   },
